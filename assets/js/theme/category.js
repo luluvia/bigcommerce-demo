@@ -5,9 +5,15 @@ import FacetedSearch from './common/faceted-search';
 import { createTranslationDictionary } from '../theme/common/utils/translations-utils';
 
 export default class Category extends CatalogPage {
+    
     constructor(context) {
         super(context);
         this.validationDictionary = createTranslationDictionary(context);
+
+        var script = document.createElement('script');
+        script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
+        script.type = 'text/javascript';
+        document.getElementsByTagName('head')[0].appendChild(script);
     }
 
     setLiveRegionAttributes($element, roleType, ariaLiveStatus) {
@@ -44,6 +50,25 @@ export default class Category extends CatalogPage {
         }
 
         $('a.reset-btn').on('click', () => this.setLiveRegionsAttributes($('span.reset-message'), 'status', 'polite'));
+
+        $("button#addAllToCart").on('click', () => {
+            
+            this.context.categoryProducts.forEach(async(product) => {
+                await $.get("/cart.php?action=add&product_id=" + product.id)
+                    .done(function(data, status, xhr) {
+                        console.log("first item complete with status " + status);
+                        return xhr.done();
+                    })
+                    .fail(function(xhr, status, error) {
+                        console.log("error with status " + status + ' and error: ');
+                        console.error(error);
+                        return xhr.done();
+                    });
+            });
+
+            window.alert("Products from category added to cart");
+
+        });
 
         this.ariaNotifyNoProducts();
     }

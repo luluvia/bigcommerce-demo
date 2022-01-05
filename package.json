@@ -6,6 +6,8 @@
   "author": "BigCommerce",
   "license": "MIT",
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.16.7",
+    "@babel/runtime": "^7.16.7",
     "@bigcommerce/stencil-utils": "^6.8.1",
     "core-js": "^3.9.0",
     "creditcards": "^3.0.1",
@@ -30,7 +32,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.17",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.12.17",
+    "@babel/preset-env": "^7.16.7",
     "@bigcommerce/citadel": "^2.15.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.5.1",

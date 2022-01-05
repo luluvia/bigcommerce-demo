@@ -742,6 +742,8 @@
             "hide": "Hide Videos",
             "show": "Show Videos"
         },
+        "add_all_to_cart": "Add All to Cart",
+        "remove_all_from_cart": "Remove All From Cart",
         "add_to_cart": "Add to Cart",
         "adding_to_cart": "Adding to cart…",
         "options": "Options",

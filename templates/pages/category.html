@@ -5,6 +5,7 @@ category:
         limit: {{theme_settings.categorypage_products_per_page}}
 ---
 {{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{inject "categoryProducts" category.products}}
 {{inject "categoryId" category.id}}
 {{#partial "head"}}
     {{#if pagination.category.previous}}
@@ -26,6 +27,18 @@ category:
         class="category-header-image"
     }}
 {{/if}}
+
+<ul>
+    <li class="navUser-item">
+        <button class="navUser-action"
+            type="button"
+            id="addAllToCart"
+            aria-label="{{lang 'products.add_all_to_cart'}}"
+        >
+            {{lang 'products.add_all_to_cart'}}
+        </button>
+    </li>
+</ul>
 {{#unless theme_settings.hide_category_page_heading }}
     <h1 class="page-heading">{{category.name}}</h1>
     {{{region name="category_below_header"}}}

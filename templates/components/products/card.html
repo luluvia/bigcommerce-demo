@@ -74,11 +74,9 @@
                     alt="{{image.alt}}"
                     title="{{image.alt}}"
                     data-src="{{getImage image}}"
-                    data-hoverimage="{{#replace '{:size}' images.1.data}}500x600{{/replace}} {{getImage images.1.data}}"
-                >
+                    data-hoverimage="{{#replace '{:size}' images.1.data}}500x600{{/replace}} {{getImage images.1.data}}">
             </div>
             <script>
-
                 $('.card-figure').hover(
                     function() {
                     var image = $(this).find('.card-image');
