@@ -8,3 +8,8 @@ This is a demo site for a BigCommerce Storefront using the Cornerstone theme fro
 - Customer info displayed on the category pages
 
 For more information, please contact @luluyume on GitHub or lu@luyu.me via email.
+
+### Licenses
+
+The original Cornerstone template belongs to BigCommerce Inc. The repository for the original template can be found at: https://github.com/bigcommerce/cornerstone
+The original template is licensed under The MIT License by BigCommerce Inc., Copyright (C) 2015-2019. https://opensource.org/licenses/MIT
