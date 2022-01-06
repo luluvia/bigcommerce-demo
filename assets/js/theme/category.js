@@ -4,6 +4,9 @@ import compareProducts from './global/compare-products';
 import FacetedSearch from './common/faceted-search';
 import { createTranslationDictionary } from '../theme/common/utils/translations-utils';
 
+const itemsPath = "/items";
+const cartPath = "/api/storefront/carts/";
+
 export default class Category extends CatalogPage {
     
     constructor(context) {
@@ -51,22 +54,80 @@ export default class Category extends CatalogPage {
 
         $('a.reset-btn').on('click', () => this.setLiveRegionsAttributes($('span.reset-message'), 'status', 'polite'));
 
-        $("button#addAllToCart").on('click', () => {
-            
-            this.context.categoryProducts.forEach(async(product) => {
-                await $.get("/cart.php?action=add&product_id=" + product.id)
-                    .done(function(data, status, xhr) {
-                        console.log("first item complete with status " + status);
-                        return xhr.done();
-                    })
-                    .fail(function(xhr, status, error) {
-                        console.log("error with status " + status + ' and error: ');
-                        console.error(error);
-                        return xhr.done();
-                    });
+        $("button#addAllToCart").on('click', async() => {
+
+            var lineItems = [];
+
+            this.context.categoryProducts.forEach((product) => {
+                const basketItem = {
+                    "productId": product.id,
+                    "quantity": 1
+                }
+                lineItems.push(basketItem);
             });
 
+            var cart = await $.get(cartPath)
+                .done(function(data) {
+                    return data;
+                })
+                .fail(function(xhr, status, error) {
+                    console.log("error with status " + status + " and error: ");
+                    console.error(error);
+                    return xhr.done();
+                });
+            var cartId = "";
+            var urlString = cartPath;
+            var data = JSON.stringify({lineItems});
+            console.log(data);
+
+            if (cart[0]) {
+                 cartId = cart[0].id;
+                 urlString = cartPath + cartId + itemsPath;
+            }
+
+            $.ajax({
+                url: urlString,
+                type: 'POST',
+                data: data})
+                .done(function(data, status, xhr) {
+                    console.log("item complete with status " + status);
+                })
+                .fail(function(xhr, status, error) {
+                    console.log("error with status " + status + " and error: ");
+                    console.error(error);
+                    return xhr.done();
+                });
+
             window.alert("Products from category added to cart");
+            window.location.reload();
+
+        });
+
+        $("button#removeAllFromCart").on('click', async() => {
+
+            var cart = await $.get(cartPath)
+                .done(function(data) {
+                    return data;
+                })
+                .fail(function(xhr, status, error) {
+                    console.log("error with status " + status + " and error: ");
+                    console.error(error);
+                    return xhr.done();
+                });
+            var cartId = cart[0].id;
+            $.ajax({
+                url: cartPath + cartId,
+                type: 'DELETE',
+                error: function(xhr, status, error) {
+                    console.log("error with status " + status + " and error: ");
+                    console.error(error);
+                    return xhr.done();
+                },
+                success: function(data, status, xhr) {
+                    window.alert("All products removed from cart");
+                    window.location.reload();
+                }
+            });
 
         });
 

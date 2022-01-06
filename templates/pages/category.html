@@ -28,7 +28,7 @@ category:
     }}
 {{/if}}
 
-<ul>
+<ul style="position:absolute">
     <li class="navUser-item">
         <button class="navUser-action"
             type="button"
@@ -38,6 +38,17 @@ category:
             {{lang 'products.add_all_to_cart'}}
         </button>
     </li>
+    {{#if cart.items}}
+    <li class="navUser-item">
+        <button class="navUser-action"
+            type="button"
+            id="removeAllFromCart"
+            aria-label="{{lang 'products.remove_all_from_cart'}}"
+        >
+            {{lang 'products.remove_all_from_cart'}}
+        </button>
+    </li>
+    {{/if}}
 </ul>
 {{#unless theme_settings.hide_category_page_heading }}
     <h1 class="page-heading">{{category.name}}</h1>
