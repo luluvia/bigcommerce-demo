@@ -28,32 +28,44 @@ category:
     }}
 {{/if}}
 
-<ul style="position:absolute">
-    <li class="navUser-item">
-        <button class="navUser-action"
-            type="button"
-            id="addAllToCart"
-            aria-label="{{lang 'products.add_all_to_cart'}}"
-        >
-            {{lang 'products.add_all_to_cart'}}
-        </button>
-    </li>
-    {{#if cart.items}}
-    <li class="navUser-item">
-        <button class="navUser-action"
-            type="button"
-            id="removeAllFromCart"
-            aria-label="{{lang 'products.remove_all_from_cart'}}"
-        >
-            {{lang 'products.remove_all_from_cart'}}
-        </button>
-    </li>
-    {{/if}}
-</ul>
 {{#unless theme_settings.hide_category_page_heading }}
-    <h1 class="page-heading">{{category.name}}</h1>
-    {{{region name="category_below_header"}}}
+<h1 class="page-heading">{{category.name}}</h1>
+{{{region name="category_below_header"}}}
 {{/unless}}
+
+<div style="display: flex; justify-content: space-between">
+    <ul>
+        <li style="display:inline-block">
+            <button class="navUser-action"
+                type="button"
+                id="addAllToCart"
+                aria-label="{{lang 'products.add_all_to_cart'}}"
+            >
+                {{lang 'products.add_all_to_cart'}}
+            </button>
+        </li>
+        {{#if cart.items}}
+        <li style="display:inline-block">
+            <button class="navUser-action"
+                type="button"
+                id="removeAllFromCart"
+                aria-label="{{lang 'products.remove_all_from_cart'}}"
+            >
+                {{lang 'products.remove_all_from_cart'}}
+            </button>
+        </li>
+        {{/if}}
+    </ul>
+    {{#if customer}}
+    <ul>
+        <li style="display:inline-block"><b>Name</b>: {{customer.name}}</li>
+        <li style="display:inline-block; margin-left: 3em"><b>Email</b>: {{customer.email}}</li>
+        {{#if customer.phone}}
+        <li style="display:inline-block; margin-left: 3em"><b>Phone</b>>: {{customer.phone}}</li>
+        {{/if}}
+    </ul>
+    {{/if}}
+</div>
 {{{category.description}}}
 <div class="page">
     {{#if category.faceted_search_enabled}}
