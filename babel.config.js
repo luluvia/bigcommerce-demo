@@ -3,6 +3,7 @@ module.exports = api => {
     return {
         plugins: [
             '@babel/plugin-syntax-dynamic-import', // add support for dynamic imports (used in app.js)
+            '@babel/plugin-transform-runtime',
             'lodash', // Tree-shake lodash
         ],
         presets: [

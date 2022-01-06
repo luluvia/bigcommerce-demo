@@ -1,3 +1,5 @@
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 <article
     class="card
     {{#if alternate}} card--alternate{{/if}}"
@@ -66,14 +68,29 @@
            {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}
         >
             <div class="card-img-container">
-                {{> components/common/responsive-img
-                    image=image
-                    class="card-image"
-                    fallback_size=theme_settings.productgallery_size
-                    lazyload=theme_settings.lazyload_mode
-                    default_image=theme_settings.default_image_product
-                }}
+                <img class="card-image lazyload"
+                    data-sizes="auto"
+                    src="{{cdn 'img/loading.svg'}}"
+                    alt="{{image.alt}}"
+                    title="{{image.alt}}"
+                    data-src="{{getImage image}}"
+                    data-hoverimage="{{#replace '{:size}' images.1.data}}500x600{{/replace}} {{getImage images.1.data}}">
             </div>
+            <script>
+                $('.card-figure').hover(
+                    function() {
+                    var image = $(this).find('.card-image');
+                    var newImg = image.attr('data-hoverimage');
+                    var currentImg = image.attr('src');
+                        if (newImg && newImg != '') image.attr('src', newImg);
+                }, function() {
+                    var image = $(this).find('.card-image');
+                    var newImg = image.attr('data-src');
+                    var currentImg = image.attr('src');
+                        if (newImg && newImg != '') image.attr('src', newImg);
+                    }
+                );
+            </script>
         </a>
 
         <figcaption class="card-figcaption">
