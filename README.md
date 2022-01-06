@@ -7,7 +7,7 @@ This is a demo site for a BigCommerce Storefront using the Cornerstone theme fro
 - A button to remove all items from the cart if an item is present in it, and to notify the user of the action
 - Customer info displayed on the category pages
 
-The site can be accessed at https://demo-store47.mybigcommercestore.com. The preview code is ki6x53gqhg.
+The site can be accessed at https://demo-store47.mybigcommerce.com. The preview code is ki6x53gqhg.
 
 For more information, please contact @luluyume on GitHub or lu@luyu.me via email.
 
